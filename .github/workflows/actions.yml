@@ -2,6 +2,14 @@ name: Actions workflow
 
 #on: [push, pull_request]
 on: 
+  #schedule:
+    # Here the format for cron expression is min, hours, day of the month, month, day of the week
+    # putting star means that it will run every day of every week or every month of every min.
+    #- cron: "* * * * *"
+
+    # website that will help with cron jobs: https://crontab.guru/
+    # 1 in min means, it will run at the first min of every hour, so 12:01, 13:01 and so on
+    #- cron: "0/5 * * * *"
   push:
   pull_request:
     types: [assigned, closed, opened, reopened]
