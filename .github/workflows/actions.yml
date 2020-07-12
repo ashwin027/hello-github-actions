@@ -10,7 +10,9 @@ on:
     # website that will help with cron jobs: https://crontab.guru/
     # 1 in min means, it will run at the first min of every hour, so 12:01, 13:01 and so on
     #- cron: "0/5 * * * *"
-  push:
+  repository_dispatch:
+    types: [build]
+  # push:
   pull_request:
     types: [assigned, closed, opened, reopened]
 jobs:
