@@ -1,0 +1,38 @@
+name: Actions workflow
+
+#on: [push, pull_request]
+on: 
+  #schedule:
+    # Here the format for cron expression is min, hours, day of the month, month, day of the week
+    # putting star means that it will run every day of every week or every month of every min.
+    #- cron: "* * * * *"
+
+    # website that will help with cron jobs: https://crontab.guru/
+    # 1 in min means, it will run at the first min of every hour, so 12:01, 13:01 and so on
+    #- cron: "0/5 * * * *"
+  repository_dispatch:
+    types: [build]
+  # push:
+  pull_request:
+    types: [assigned, closed, opened, reopened]
+jobs:
+  run-github-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: List files
+        run: |
+          pwd
+          ls
+          echo $GITHUB_SHA
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_WORKSPACE
+          echo "${{github.token}}"
+      - name: js Actions
+        id: jsaction
+        uses: actions/hello-world-javascript-action@v1
+        with:
+          who-to-greet: Ashwin
+      # - name: Log greeting times
+      #   run: echo ${{ steps.jsaction.outputs.time }}
