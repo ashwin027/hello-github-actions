@@ -1,0 +1,25 @@
+name: Actions workflow
+
+on: [push]
+
+jobs:
+  run-github-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: List files
+        run: |
+          pwd
+          ls
+          echo $GITHUB_SHA
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_WORKSPACE
+          echo "${{github.token}}"
+      - name: js Actions
+        id: jsaction
+        uses: actions/hello-world-javascript-action@v1
+        with:
+          who-to-greet: Ashwin
+      # - name: Log greeting time
+      #   run: echo ${{ steps.jsaction.outputs.time }}
